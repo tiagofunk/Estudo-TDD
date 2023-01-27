@@ -25,4 +25,26 @@ public class TestePilha {
         assertEquals(1, p.tamanho());
         assertEquals("primeiro", p.topo());
     }
+
+    @Test
+    public void empilharDuplo(){
+        Pilha p = new Pilha();
+        p.empilha("primeiro");
+        p.empilha("segundo");
+        assertFalse(p.estaVazia());
+        assertEquals(2, p.tamanho());
+        assertEquals("segundo", p.topo());
+    }
+
+    @Test
+    public void empilharDesempilha(){
+        Pilha p = new Pilha();
+        p.empilha("primeiro");
+        p.empilha("segundo");
+        String desempilhado = p.desempilha();
+        assertFalse(p.estaVazia());
+        assertEquals(1, p.tamanho());
+        assertEquals("primeiro", p.topo());
+        assertEquals("segundo", desempilhado);
+    }
 }
