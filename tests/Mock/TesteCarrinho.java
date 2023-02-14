@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import src.Mock.CarrinhoCompras;
 import src.Mock.MockObservadorCarrinho;
+import src.Mock.ObservadorCarrinho;
 import src.Mock.Produto;
 
 public class TesteCarrinho {
@@ -38,5 +39,19 @@ public class TesteCarrinho {
         c.adicionarProduto(new Produto("Tênis", 100));
         mock1.verificaRecebimentoProduto("Tênis", 100);
         mock2.verificaRecebimentoProduto("Tênis", 100);
+    }
+
+    @Test
+    public void continuaNotificandoComErroEmObservador(){
+        CarrinhoCompras c = new CarrinhoCompras();
+        MockObservadorCarrinho mock1 = new MockObservadorCarrinho();
+        ObservadorCarrinho mock2 = new MockObservadorCarrinhoComErro();
+        MockObservadorCarrinho mock3 = new MockObservadorCarrinho();
+        c.adicionarObservador(mock1);
+        c.adicionarObservador(mock2);
+        c.adicionarObservador(mock3);
+        c.adicionarProduto(new Produto("Tênis", 100));
+        mock1.verificaRecebimentoProduto("Tênis", 100);
+        mock3.verificaRecebimentoProduto("Tênis", 100);
     }
 }

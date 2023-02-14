@@ -11,7 +11,9 @@ public class CarrinhoCompras {
     public void adicionarProduto(Produto p){
         itens.add(p);
         for( ObservadorCarrinho obs: observadores ){
-            obs.produtoAdicionado(p.getNome(), p.getValor());
+            try{
+                obs.produtoAdicionado(p.getNome(), p.getValor());
+            }catch(Exception e){}
         }
     }
 
