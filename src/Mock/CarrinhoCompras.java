@@ -5,12 +5,14 @@ import java.util.List;
 
 public class CarrinhoCompras {
     
-    private ObservadorCarrinho observadorCarrinho;
+    private List<ObservadorCarrinho> observadores = new ArrayList<>();
     private List<Produto> itens = new ArrayList<>();
 
     public void adicionarProduto(Produto p){
         itens.add(p);
-        this.observadorCarrinho.produtoAdicionado(p.getNome(), p.getValor());
+        for( ObservadorCarrinho obs: observadores ){
+            obs.produtoAdicionado(p.getNome(), p.getValor());
+        }
     }
 
     public int calculaTotal(){
@@ -21,7 +23,7 @@ public class CarrinhoCompras {
         return total;
     }
 
-    public void adicionarObservador(ObservadorCarrinho observadorCarrinho) {
-        this.observadorCarrinho = observadorCarrinho;
+    public void adicionarObservador(ObservadorCarrinho observador) {
+        this.observadores.add(observador);
     }
 }
